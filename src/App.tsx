@@ -3,7 +3,7 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-export const BASE_URL = "http://localhost"
+export const BASE_URL = "http://backend.dubrovskii-school.ru"
 
 function App() {
     const [count, setCount] = useState(0)
