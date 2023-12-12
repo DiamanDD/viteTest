@@ -1,96 +1,64 @@
-import {useEffect, useState} from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import {ChangeEvent, useState} from 'react'
 import './App.css'
+import css from "./styles.module.css"
 
 export const BASE_URL = import.meta.env.VITE_BASE_URL_BACKEND
 
 function App() {
-    const [count, setCount] = useState(0)
-    const [login, setLogin] = useState("")
-    const [password, setPassword] = useState("")
+    const [zakaz, setZakaz] = useState("")
     const [message, setMessage] = useState("")
-    const [isAuth, setIsAuth] = useState(false)
+    const [isLoading, setIsloading] = useState(false)
+
     const fetchData = async () => {
-        fetch(`${BASE_URL}/auth/login`, {
+        setIsloading(true)
+        fetch(`${BASE_URL}/auth/westenter`, {
             method: "POST",
-            headers: {'content-type': 'application/json'},
+            headers: {
+                'content-type': 'application/json',
+            },
             body: JSON.stringify({
-                username: login, password: password
-                //username: "admin", password: "admin"
+                zakaz
             })
-        }).then(res => res.json().then(result => {
-            if (res.status === 200) {
-                localStorage.setItem("access_token", `Bearer ${result.access_token}`)
-                setIsAuth(true)
-            } else {
-                setMessage(result.message)
-                setTimeout(() => setMessage(""), 5000)
+        }).then(res => {
+            res.json().then(result => {
+                if (result.statusCode) {
+                    setMessage(result.message)
 
+                } else {
+                    setMessage(result.data)
 
-            }
-        }))
-
-    }
-    const getProfile = async () => {
-        const authorization = localStorage.getItem("access_token") || ''
-        fetch(`${BASE_URL}/auth/profile`, {
-            method: "GET",
-            headers: {'content-type': 'application/json', authorization},
-        }).then((res) => {
-            if (res.status === 200) {
-                setIsAuth(true)
-                res.json().then(result => console.log(result)).catch(erro => {
-                    console.log(erro)
-                })
-            }
-
+                }
+            })
         })
-    }
-    const logOut = async () => {
-        localStorage.removeItem("access_token")
-        setIsAuth(false)
 
+        setIsloading(false)
     }
 
-    useEffect(() => {
-        if (!isAuth) {
-            getProfile()
+    const clearMessage = () => {
+        if (message) {
+            setMessage("")
         }
-
-    }, []);
+    }
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+        clearMessage()
+        setZakaz(e.target.value)
+    }
+    const onCklick = () => {
+        clearMessage()
+        if (zakaz.length >= 10) {
+            fetchData()
+        } else {
+            setMessage("Не верный номер заказа")
+        }
+    }
 
     return (
-        <>
-
-            {isAuth ? <>
-                <div>
-                    <a href="https://vitejs.dev" target="_blank">
-                        <img src={viteLogo} className="logo" alt="Vite logo"/>
-                    </a>
-                    <a href="https://react.dev" target="_blank">
-                        <img src={reactLogo} className="logo react" alt="React logo"/>
-                    </a>
-                </div>
-                <h1>Vite + React</h1>
-                <div className="card">
-                    <button onClick={() => setCount((count) => count + 1)}>
-                        count is {count}
-                    </button>
-                    <p>
-                        Edit <code>src/App.tsx</code> and save to test HMR
-                    </p>
-                </div>
-                <p className="read-the-docs">
-                    Click on the Vite and React logos to learn more
-                </p>
-                <button onClick={logOut}>Выход</button>
-            </> : <> Логин<input value={login} onChange={(e) => setLogin(e.target.value)}/> <br/>
-                Пароль<input type={"password"} value={password} onChange={(e) => setPassword(e.target.value)}/> <br/>
-                {message && <div>{message}</div>}
-                <button onClick={fetchData}>Авторизация</button>
-            </>}
-        </>
+        <div className={css.container}>
+            {message && <div>{message}</div>}
+            {isLoading && <div>...Загрузка</div>}
+            <input value={zakaz} onChange={onChange}/>
+            <button onClick={onCklick}>Узнать статус заказа</button>
+        </div>
     )
 }
 
