@@ -54,7 +54,6 @@ function App() {
 
     return (
         <div className={css.container}>
-            <div>test</div>
             {message && <div>{message}</div>}
             {isLoading && <div>...Загрузка</div>}
             <input value={zakaz} onChange={onChange}/>
