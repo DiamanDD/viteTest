@@ -6,7 +6,7 @@
 
 .container > input {
     height: 50px;
-    font-size: 24px;
+    font-size: 22px;
 }
 
 .container > button {
@@ -17,3 +17,64 @@
     align-content: center;
 
 }
+.errorZakaz{
+    display: flex;
+    font-weight: bold;
+    font-size: 25px;
+    gap: 50px;
+    text-align: center;
+
+    /*height: 90px;*/
+    /*width:300px;*/
+    /*margin:0 auto;*/
+    /*background: #343436;*/
+    /*font-family: 'Arial', sans-serif;*/
+    /*font-size: 1.2em;*/
+    /*border-right: 2px solid #000; !* Линия-курсор *!*/
+    /*white-space: nowrap; !* Запрет переноса текста на новую строку *!*/
+    /*overflow: hidden; !* Скрываем текст, который выходит за границы контейнера *!*/
+}
+
+
+.errorZakaz span {
+    display: inline-block;
+}
+
+
+.errorZakaz p{
+    text-align:center;
+    color:#fff;
+    text-transform: uppercase;
+    padding-top: 35px;
+    animation: text 7s infinite linear;
+    padding-left: 100%;
+    white-space: nowrap;
+}
+@keyframes text {
+    0%{
+        transform: translate(0, 0);
+    }
+
+    100%{
+        transform: translate(-160%, 0);
+    }
+}
+
+.containerError{
+    padding-bottom: 300px;
+}
+.statusZakaza{
+    font-weight: bold;
+    border: 1px solid rebeccapurple;
+    background-color: rebeccapurple;
+    font-style: oblique;
+    font-size: 24px;
+}
+.instrukciaContainer {
+    display: flex;
+    justify-content: flex-end; /* Это выровняет кнопку Подробнее вправо */
+    margin-bottom: 150px; /* Вы можете настроить отступ сверху по вашему усмотрению */
+    top: 0;
+    right: 0;
+}
+
