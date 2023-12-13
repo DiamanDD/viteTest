@@ -58,7 +58,10 @@ function App() {
       <div>
         <Button />
       </div>
-      <InfiniteTypingEffect />
+      <div className={css.containerText}>
+        <InfiniteTypingEffect />
+      </div>
+
       <div className={css.container}>
         {message && <div className={css.statusZakaza}>{message}</div>}
         {isLoading && <div>...Загрузка</div>}

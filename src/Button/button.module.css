@@ -3,6 +3,7 @@
     justify-content: center;
     gap: 20px;
     padding-bottom: 70px;
+    align-items: center;
 }
 .instrukcia{
     background-color: #3498db;
@@ -88,4 +89,11 @@
     color: #fff;
     cursor: pointer;
 }
-
+.smile{
+    font-size: 80px;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    display: flex;
+}
