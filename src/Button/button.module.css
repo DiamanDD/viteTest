@@ -1,0 +1,91 @@
+.instrukciaContainer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding-bottom: 70px;
+}
+.instrukcia{
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px ;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.instrukcia:hover {
+    background-color: #2980b9;
+}
+/*.okno {*/
+/*    position: fixed;*/
+/*    top: 50%;*/
+/*    left: 50%;*/
+/*    transform: translate(-50%, -50%);*/
+/*    background-color: black;*/
+/*    padding: 20px;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);*/
+/*    z-index: 1000;*/
+/*}*/
+
+/*.oknoContent {*/
+/*    text-align: center;*/
+/*}*/
+
+/*.oknoClose {*/
+/*    position: absolute;*/
+/*    top: 10px;*/
+/*    right: 10px;*/
+/*    font-size: 25px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.oknoText {*/
+/*    margin-top: 10px;*/
+/*}*/
+
+.okno {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Полупрозрачный черный фон */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.oknoContent {
+    text-align: center;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #333;
+}
+
+.oknoText {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #fff;
+    text-align: left;
+}
+
+.oknoText p {
+    margin-bottom: 10px;
+}
+
+.oknoText span {
+    font-size: 20px;
+    margin-right: 5px;
+}
+
+.oknoClose {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 35px;
+    color: #fff;
+    cursor: pointer;
+}
+
