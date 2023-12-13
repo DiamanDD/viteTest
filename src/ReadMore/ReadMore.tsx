@@ -1,7 +1,7 @@
-import css from './button.module.css'
+import css from './ReadMore.module.css'
 import { useState } from 'react'
 
-export const Button = () => {
+export const ReadMore = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const openModal = () => {
@@ -19,7 +19,6 @@ export const Button = () => {
           Подробнее
         </button>
       </div>
-
       {isModalOpen && (
         <div className={css.okno}>
           <div className={css.oknoContent}>
@@ -46,7 +45,8 @@ export const Button = () => {
               <br />
               <span>📞</span> - ЗАКАЗ НЕ НАЙДЕН - Если в течение 3-х рабочих
               дней после оплаты у заказа нет статуса "ОПЛАЧЕНО", <br />
-              то отправьте свой чек и номер заказа на ватсап, а чтобы это сделать, <b>нажмите кнопку SOS</b>:{' '}
+              то отправьте свой чек и номер заказа на ватсап, а чтобы это
+              сделать, <b>нажмите кнопку SOS</b>:{' '}
               <a
                 href="https://wa.me/79183761821"
                 target="_blank"

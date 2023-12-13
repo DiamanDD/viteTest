@@ -2,14 +2,18 @@ import { ChangeEvent, useState } from 'react'
 
 import './App.css'
 import css from './styles.module.css'
-import { Button } from './Button/Button.tsx'
 import { InfiniteTypingEffect } from './InfiniteTypingEffect.tsx'
+import { ReadMore } from './ReadMore/ReadMore.tsx'
+import { Informer } from './Informer/Informer.tsx'
 
 export const BASE_URL = import.meta.env.VITE_BASE_URL_BACKEND
 
 function App() {
   const [zakaz, setZakaz] = useState('')
   const [message, setMessage] = useState('')
+  const [error, setError] = useState('')
+  const [tk, setTk] = useState('')
+  const [trackNumber, setTrackNumber] = useState('')
   const [isLoading, setIsloading] = useState(false)
 
   const fetchData = async () => {
@@ -25,9 +29,13 @@ function App() {
     }).then((res) => {
       res.json().then((result) => {
         if (result.statusCode) {
-          setMessage(result.message)
+          setError(result.message)
         } else {
-          setMessage(result.data)
+          setMessage(result.status)
+          setTk(result.stiker)
+          if (result.trackNumber) {
+            setTrackNumber(result.trackNumber)
+          }
         }
       })
     })
@@ -36,8 +44,11 @@ function App() {
   }
 
   const clearMessage = () => {
-    if (message) {
+    if (message || error) {
       setMessage('')
+      setTk('')
+      setTrackNumber('')
+      setError('')
     }
   }
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -49,21 +60,25 @@ function App() {
     if (zakaz.length >= 10) {
       fetchData()
     } else {
-      setMessage('Не верный номер заказа')
+      setError('Не верный номер заказа')
     }
   }
 
   return (
-    <>
+    <div className={css.container}>
       <div>
-        <Button />
+        <ReadMore />
       </div>
-      <div className={css.containerText}>
-        <InfiniteTypingEffect />
-      </div>
-
-      <div className={css.container}>
-        {message && <div className={css.statusZakaza}>{message}</div>}
+      {!message && (
+        <div className={css.containerText}>
+          <InfiniteTypingEffect />
+        </div>
+      )}
+      <div className={css.messageContainer}>
+        {error && <Informer title={'Статус'} message={error} />}
+        {message && <Informer title={'Статус'} message={message} />}
+        {tk && <Informer title={'Вы выбрали для доставки ТК'} message={tk} />}
+        {trackNumber && <Informer title={'Трек номер'} message={trackNumber} />}
         {isLoading && <div>...Загрузка</div>}
         <input
           value={zakaz}
@@ -72,7 +87,7 @@ function App() {
         />
         <button onClick={onCklick}>Узнать статус заказа</button>
       </div>
-    </>
+    </div>
   )
 }
 
