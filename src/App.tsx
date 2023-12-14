@@ -28,6 +28,7 @@ function App() {
       }),
     }).then((res) => {
       res.json().then((result) => {
+        setIsloading(false)
         if (result.statusCode) {
           setError(result.message)
         } else {
@@ -40,7 +41,7 @@ function App() {
       })
     })
 
-    setIsloading(false)
+
   }
 
   const clearMessage = () => {
@@ -77,9 +78,9 @@ function App() {
       <div className={css.messageContainer}>
         {error && <Informer title={'Статус'} message={error} />}
         {message && <Informer title={'Статус'} message={message} />}
-        {tk && <Informer title={'Вы выбрали для доставки ТК'} message={tk} />}
+        {tk && <Informer title={'Вы выбрали для доставки'} message={tk} />}
         {trackNumber && <Informer title={'Трек номер'} message={trackNumber} />}
-        {isLoading && <div>...Загрузка</div>}
+        {isLoading && <div className={css.loader}>...Загрузка</div>}
         <input
           value={zakaz}
           onChange={onChange}

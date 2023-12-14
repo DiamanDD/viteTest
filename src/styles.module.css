@@ -67,6 +67,10 @@
     justify-content: center;
     gap: 20px;
 }
+.loader{
+    font-size: 25px;
+    font-weight: bold;
+}
 
 @media (max-width: 480px) {
     .container {
