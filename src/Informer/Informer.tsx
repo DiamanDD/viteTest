@@ -18,8 +18,12 @@ const getStatusSborkaIdet = (status: string) => {
 const getStatusSobrano = (status: string) => {
   return status.toLowerCase().startsWith('заказ собран')
 }
+const getStatusProvedenSamovivoz = (status: string) => {
+  return status.toLowerCase().startsWith('проведено самовывоз')
+}
+
 const getStatusGotovaVidacha = (status: string) => {
-  return status.toLowerCase().startsWith('готов к выдаче')
+    return status.toLowerCase().startsWith('готов к выдаче')
 }
 export const Informer = ({ message, title }: Props) => {
   return (
@@ -31,6 +35,7 @@ export const Informer = ({ message, title }: Props) => {
           [css.sborka]: getStatusSborka(message),
           [css.sborkaIdet]: getStatusSborkaIdet(message),
           [css.sobrano]: getStatusSobrano(message),
+          [css.provedenSamovivoz]: getStatusProvedenSamovivoz(message),
           [css.gotovaVidacha]: getStatusGotovaVidacha(message),
         })}
       >
