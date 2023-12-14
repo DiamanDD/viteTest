@@ -20,7 +20,18 @@
 .done {
     background-color: green;
 }
-
+.sborka{
+    background-color: firebrick;
+}
+.sborkaIdet{
+    background-color: orangered;
+}
+.sobrano{
+    background-color: yellowgreen;
+}
+.gotovaVidacha{
+    background-color: #646cff;
+}
 .title {
     width: 250px;
     text-align: left;
