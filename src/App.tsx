@@ -40,8 +40,6 @@ function App() {
         }
       })
     })
-
-
   }
 
   const clearMessage = () => {

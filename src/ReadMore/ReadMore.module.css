@@ -74,3 +74,43 @@
     cursor: pointer;
     display: flex;
 }
+
+@media screen and (max-width: 600px) {
+    .oknoContent {
+        max-width: 100%;
+        max-height: 100%;
+    }
+    .smile {
+        font-size: 60px;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        display: flex;
+
+    }
+    .oknoText {
+        font-size: 15px;
+        line-height: 1.4;
+        color: #fff;
+        text-align: left;
+    }
+    .oknoClose {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        font-size: 28px;
+        color: #fff;
+        cursor: pointer;
+    }
+}
+@media screen and (max-width: 480px) {
+    .oknoContent {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .oknoText {
+        font-size: 12px;
+    }
+}

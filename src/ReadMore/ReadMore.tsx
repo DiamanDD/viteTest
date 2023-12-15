@@ -13,7 +13,7 @@ export const ReadMore = () => {
   }
 
   return (
-    <>
+    <div className={css.windowPodrobnee}>
       <div className={css.instrukciaContainer}>
         <button className={css.instrukcia} onClick={openModal}>
           Подробнее
@@ -64,6 +64,6 @@ export const ReadMore = () => {
           </div>
         </div>
       )}
-    </>
+    </div>
   )
 }
