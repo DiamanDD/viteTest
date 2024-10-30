@@ -4,9 +4,13 @@ import { clsx } from 'clsx'
 interface Props {
   message: string
   title: string
+  status?: 'error' | 'success' | 'warning'
 }
 
-const getStatus = (status: string) => {
+export const getStatusDone = (status: string) => {
+  return status.toLowerCase().startsWith('отгружено')
+}
+ const getStatus = (status: string) => {
   return status.toLowerCase().startsWith('оплачен')
 }
 const getStatusSborka = (status: string) => {
@@ -23,9 +27,9 @@ const getStatusProvedenSamovivoz = (status: string) => {
 }
 
 const getStatusGotovaVidacha = (status: string) => {
-    return status.toLowerCase().startsWith('готов к выдаче')
+  return status.toLowerCase().startsWith('готов к выдаче')
 }
-export const Informer = ({ message, title }: Props) => {
+export const Informer = ({ message, title, status }: Props) => {
   return (
     <div className={css.container}>
       <div className={css.title}>{title}</div>
@@ -37,6 +41,7 @@ export const Informer = ({ message, title }: Props) => {
           [css.sobrano]: getStatusSobrano(message),
           [css.provedenSamovivoz]: getStatusProvedenSamovivoz(message),
           [css.gotovaVidacha]: getStatusGotovaVidacha(message),
+          [css.sborka]: status === 'error',
         })}
       >
         {message}
