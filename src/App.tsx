@@ -1,27 +1,19 @@
 import { ChangeEvent, useState } from 'react'
 import 'dayjs/locale/ru'
-import { isEmpty } from 'lodash'
 import './App.css'
 import css from './styles.module.css'
 import { InfiniteTypingEffect } from './InfiniteTypingEffect.tsx'
 import { ReadMore } from './ReadMore/ReadMore.tsx'
-import { getStatusDone, Informer } from './Informer/Informer.tsx'
+import { Informer } from './Informer/Informer.tsx'
 import dayjs from 'dayjs'
 
 dayjs.locale('ru')
 
 export const BASE_URL = import.meta.env.VITE_BASE_URL_BACKEND
 
-interface Deadline {
-  'startDate': number,
-  'deadline': number,
-  'withTime': false
-}
 
 function App() {
   const [zakaz, setZakaz] = useState('')
-  const [reason, setReason] = useState('')
-  const [deadline, setDeadline] = useState<Deadline>({} as Deadline)
   const [message, setMessage] = useState('')
   const [error, setError] = useState('')
   const [tk, setTk] = useState('')
@@ -49,12 +41,6 @@ function App() {
           if (result.trackNumber) {
             setTrackNumber(result.trackNumber)
           }
-          if (result.reason) {
-            setReason(result.reason)
-          }
-          if (result.deadline) {
-            setDeadline(result.deadline)
-          }
         }
       })
     })
@@ -66,8 +52,6 @@ function App() {
       setTk('')
       setTrackNumber('')
       setError('')
-      setDeadline({} as Deadline)
-      setReason('')
     }
   }
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -97,14 +81,6 @@ function App() {
         {message && <Informer title={'Статус'} message={message} />}
         {tk && <Informer title={'Вы выбрали для доставки'} message={tk} />}
         {trackNumber && <Informer title={'Трек номер'} message={trackNumber} />}
-        {!getStatusDone(message) && <>
-          {!isEmpty(deadline) &&
-            <Informer title={'Планируемая дата отгрузки'}
-                      message={`C ${dayjs(deadline.startDate).format('D MMMM')} по ${dayjs(deadline.deadline).format('D MMMM')}`}
-                      status={'error'} />}
-          {reason && <Informer title={'Причина задержки отгрузки'} message={reason} status={'error'} />}
-        </>}
-
         {isLoading && <div className={css.loader}>...Загрузка</div>}
         <input
           value={zakaz}
